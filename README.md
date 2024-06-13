@@ -5,11 +5,14 @@
 | Column             | Type    | Options      |
 | ------------------ | ------- | ------------ |
 | nickname           | string  | null: false  |
-| last-name          | string  | null: false  |
-| first-name         | string  | null: false  |
-| last-name(kana)    | string  | null: false  |
-| first-name(kana)   | string  | null: false  |
-| birthday           | integer | null: false  |
+| email              | string  | null: false  |
+| password           | string  | null: false  |
+| encrypted_password | string  | null: false  |
+| last_name          | string  | null: false  |
+| first_name         | string  | null: false  |
+| last_name_kana     | string  | null: false  |
+| first_name_kana    | string  | null: false  |
+| birthday           | data    | null: false  |
 
 
 ### Association
@@ -25,14 +28,13 @@
 | ------------------ | --------- | ------------ |
 | title              | string    | null: false  |
 | content            | text      | null: false  |
-| category           | string    | null: false  |
-| items-status       | string    | null: false  |
-| delivery-price     | string    | null: false  |
-| delivery-area      | string    | null: false  |
-| delivery-date      | string    | null: false  |
+| category_id        | integer   | null: false  |
+| items_status_id    | integer   | null: false  |
+| delivery_price_id  | integer   | null: false  |
+| prefecture_id      | integer   | null: false  |
+| delivery-date_id   | integer   | null: false  |
 | items-price        | integer   | null: false  |
 | user               | reference | null: false, foreign_key |
-| order              | reference | null: false, foreign_key |
 
 
 ### Association
@@ -44,11 +46,10 @@
 
 ## ordersテーブル
 
-| Column             | Type      | Options      |
-| ------------------ | --------- | ------------ |
-| user               | reference | null: false, foreign_key |
-| item               | reference | null: false, foreign_key |
-| address            | reference | null: false, foreign_key |
+| Column             | Type       | Options      |
+| ------------------ | ---------- | ------------ |
+| user               | references | null: false, foreign_key |
+| item               | references | null: false, foreign_key |
 
 
 ### Association
@@ -61,15 +62,15 @@
 
 ## addressテーブル
 
-| Column             | Type      | Options      |
-| ------------------ | --------- | ------------ |
-| post-number        | integer   | null: false  |
-| prefecture         | string    | null: false  |
-| city               | string    | null: false  |
-| number             | string    | null: false  |
-| building           | string    |              |
-| phone-number       | integer   | null: false  |
-| order              | reference | null: false  |
+| Column             | Type       | Options      |
+| ------------------ | ---------- | ------------ |
+| post_number        | integer    | null: false  |
+| prefecture_id      | integer    | null: false  |
+| city               | string     | null: false  |
+| number             | string     | null: false  |
+| building           | string     |              |
+| phone_number       | string     | null: false  |
+| order              | references | null: false  |
 
 
 ### Association
