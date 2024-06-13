@@ -5,14 +5,13 @@
 | Column             | Type    | Options      |
 | ------------------ | ------- | ------------ |
 | nickname           | string  | null: false  |
-| email              | string  | null: false  |
-| password           | string  | null: false  |
+| email              | string  | null: false, unique: true  |
 | encrypted_password | string  | null: false  |
 | last_name          | string  | null: false  |
 | first_name         | string  | null: false  |
 | last_name_kana     | string  | null: false  |
 | first_name_kana    | string  | null: false  |
-| birthday           | data    | null: false  |
+| birthday           | date    | null: false  |
 
 
 ### Association
@@ -32,9 +31,9 @@
 | items_status_id    | integer   | null: false  |
 | delivery_price_id  | integer   | null: false  |
 | prefecture_id      | integer   | null: false  |
-| delivery-date_id   | integer   | null: false  |
-| items-price        | integer   | null: false  |
-| user               | reference | null: false, foreign_key |
+| delivery_date_id   | integer   | null: false  |
+| items_price        | integer   | null: false  |
+| user               | reference | null: false, foreign_key: true |
 
 
 ### Association
@@ -48,31 +47,31 @@
 
 | Column             | Type       | Options      |
 | ------------------ | ---------- | ------------ |
-| user               | references | null: false, foreign_key |
-| item               | references | null: false, foreign_key |
+| user               | references | null: false, foreign_key: true |
+| item               | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- has_many :address
+- has_one :address
 
 
 
-## addressテーブル
+## addressesテーブル
 
 | Column             | Type       | Options      |
 | ------------------ | ---------- | ------------ |
-| post_number        | integer    | null: false  |
+| post_number        | string     | null: false  |
 | prefecture_id      | integer    | null: false  |
 | city               | string     | null: false  |
 | number             | string     | null: false  |
 | building           | string     |              |
 | phone_number       | string     | null: false  |
-| order              | references | null: false  |
+| order              | references | null: false, foreign_key: true  |
 
 
 ### Association
 
-- belongs_to :address
+- belongs_to :order
