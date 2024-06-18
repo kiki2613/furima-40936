@@ -9,9 +9,9 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :delivery_date
 
-  validates :image, :title, :content, :user_id, 
+  validates :image, :title, :content,
             presence: true
-  validates :category_id, :items_status_id, :items_status_id, :delivery_price_id, :prefecture_id, :delivery_date_id,
+  validates :category_id, :items_status_id, :delivery_price_id, :prefecture_id, :delivery_date_id,
             numericality: { other_than: 1, message: 'を選択してください' }
   validates :items_price,
             presence: true,
