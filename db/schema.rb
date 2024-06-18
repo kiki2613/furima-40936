@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_18_051130) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "items_price"
+    t.integer "items_price", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
