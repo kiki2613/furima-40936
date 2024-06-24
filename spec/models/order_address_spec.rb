@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @order_address = FactoryBot.build(:order_address)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
   end
 
   describe '商品の購入' do
@@ -24,14 +26,14 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
 
-      it 'user_idが空だと購入できない' do
-        @order_address.user_id = ''
+      it 'userと紐づいていないと購入できない' do
+        @order_address.user_id = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("User can't be blank")
       end
 
-      it 'item_idが空だと購入できない' do
-        @order_address.item_id = ''
+      it 'itemと紐づいていないと購入できない' do
+        @order_address.item_id = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
@@ -78,8 +80,14 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
       end
 
-      it 'phone_numberが10桁以上11桁以内でないと購入できない' do
-        @order_address.phone_number = '111122223333'
+      it 'phone_numberが9桁以内では購入できない' do
+        @order_address.phone_number = '080111222'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone number はハイフンなしの半角数値で入力してください')
+      end
+
+      it 'phone_numberが12桁以上では購入できない' do
+        @order_address.phone_number = '080111122223'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number はハイフンなしの半角数値で入力してください')
       end
