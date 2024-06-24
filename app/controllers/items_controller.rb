@@ -52,13 +52,13 @@ class ItemsController < ApplicationController
   end
 
   def moved_top_page
-    unless current_user.id == @item.user.id
+    if current_user.id == @item.user.id
       redirect_to root_path
     end
   end
 
   def sold_out
-    if @item.order.present?
+    unless @item.order.present?
       redirect_to root_path
     end
   end
