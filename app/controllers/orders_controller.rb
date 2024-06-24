@@ -29,13 +29,13 @@ class OrdersController < ApplicationController
   end
 
   def moved_top_page
-    unless current_user.id == @item.user.id
+    if current_user.id == @item.user.id
       redirect_to root_path
     end
   end
 
   def sold_out
-    unless @item.order.present?
+    if @item.order.present?
       redirect_to root_path
     end
   end
